@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/05/20 16:51:41 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/05/20 22:26:21 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ ifeq ($(UNAME_S),Darwin)
 endif
 
 CC := g++ -march=native -mtune=native -Ofast -flto -pipe
-CC_DEBUG := gcc -march=native -mtune=native -g3 -D DEBUG
+CC_DEBUG := g++ -march=native -mtune=native -g3 -D DEBUG
 CFLAGS := -Wall -Wextra -Werror -Wunused
 IFLAGS := -I $(CURDIR)/includes/
+LIBS := -lSDL2
 
 SRCS := $(abspath $(wildcard srcs/*.cpp))
 OBJ := $(SRCS:.cpp=.o)
@@ -48,7 +49,7 @@ $(OBJ): %.o: %.cpp
 
 $(NAME): $(OBJ)
 	@$(ECHO) -n ' <q.p> | $(NPWD): '
-	@$(CC) $(OBJ) -o $(NAME)
+	@$(CC) $(OBJ) $(LIBS) -o $(NAME)
 	@$(ECHO) "[$(INVERT)$(GREEN)✓$(WHITE)]"
 
 del:
@@ -65,21 +66,10 @@ debug: set_cc_debug pre
 	@$(ECHO) "$(INVERT)$(GREEN)Ready for debug.$(WHITE)"
 clean:
 	@$(DEL) $(OBJ)
-	@$(LSDLMAKE) clean
-	@$(LMAKE) clean
 
 fclean: clean
-	@$(LSDLMAKE) fclean
-	@$(LMAKE) fclean
 	@$(DEL) $(NAME)
 	@$(ECHO) "$(INVERT)$(RED)deleted$(WHITE)$(INVERT): $(NPWD)$(WHITE)"
-
-norme:
-	@$(LMAKE) norme
-	@$(LSDLMAKE) norme
-	@$(ECHO) "$(INVERT)norminette for $(GREEN)$(NAME)$(WHITE)$(INVERT):$(WHITE)"
-	@norminette includes/
-	@norminette $(SRCS)
 
 re: fclean all
 
