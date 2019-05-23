@@ -9,9 +9,11 @@ class AirHokey
 {
 public:
     AirHokey();
-    ~AirHokey();
+    AirHokey(const std::string title, const size_t w, const size_t h);
 
-    void    sdl_init(const std::string title, const int32_t w, const int32_t h);
+    void    rendering(void);
+
+    ~AirHokey();
 
     Sdl *sdl;
 };

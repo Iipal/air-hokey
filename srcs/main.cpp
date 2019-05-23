@@ -2,16 +2,18 @@
 
 int	main(void)
 {
-    AirHokey    ah;
+    AirHokey    ah("Air Hokey", 250, 500);
     bool        quit;
-
-    ah.sdl_init("Air Hokey", 1000, 500);
 
     quit = false;
     while (!quit)
-        while (0 < SDL_PollEvent(ah.sdl->sdl_get_event_addr()))
-            if (SDL_QUIT == ah.sdl->sdl_get_event_type())
+    {
+        while (0 < SDL_PollEvent(ah.sdl->get_event_addr()))
+            if (SDL_QUIT == ah.sdl->get_event_type())
                 quit = true;
-            else if (SDL_KEYDOWN == ah.sdl->sdl_get_event_type())
+            else if (SDL_KEYDOWN == ah.sdl->get_event_type()
+                && SDLK_ESCAPE == ah.sdl->get_keycode())
                 quit = true;
+        ah.rendering();
+    }
 }

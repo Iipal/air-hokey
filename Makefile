@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/05/20 22:26:21 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/05/23 20:10:11 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ ifeq ($(UNAME_S),Darwin)
 	ECHO := echo
 endif
 
-CC := g++ -march=native -mtune=native -Ofast -flto -pipe
-CC_DEBUG := g++ -march=native -mtune=native -g3 -D DEBUG
+CC := g++ -Ofast -flto -pipe
+CC_DEBUG := g++ -g
 CFLAGS := -Wall -Wextra -Werror -Wunused
 IFLAGS := -I $(CURDIR)/includes/
 LIBS := -lSDL2
@@ -49,7 +49,7 @@ $(OBJ): %.o: %.cpp
 
 $(NAME): $(OBJ)
 	@$(ECHO) -n ' <q.p> | $(NPWD): '
-	@$(CC) $(OBJ) $(LIBS) -o $(NAME)
+	@$(CC) $(OBJ) $(IFLAGS) $(LIBS) -o $(NAME)
 	@$(ECHO) "[$(INVERT)$(GREEN)✓$(WHITE)]"
 
 del:
