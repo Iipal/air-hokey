@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 14:43:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/05/23 20:10:11 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/05/23 23:05:26 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CC := g++ -Ofast -flto -pipe
 CC_DEBUG := g++ -g
 CFLAGS := -Wall -Wextra -Werror -Wunused
 IFLAGS := -I $(CURDIR)/includes/
-LIBS := -lSDL2
+LIBS := -lSDL2 -lSDL2_image
 
 SRCS := $(abspath $(wildcard srcs/*.cpp))
 OBJ := $(SRCS:.cpp=.o)

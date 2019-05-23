@@ -14,7 +14,7 @@ void AirHokey::rendering()
 
     while (++y < this->sdl->get_win_h() && (x = ~0L))
         while (++x < this->sdl->get_win_w())
-            this->sdl->pixelput(x, y, 0xffaffa);
+            this->sdl->pixelput(x, y, 0xffaffa, this->sdl->get_win_w(), this->sdl->get_win_h());
     SDL_UpdateWindowSurface(this->sdl->get_win());
 }
 
